@@ -1,7 +1,6 @@
 package fr.valentinthuillier.portfolio.servlets;
 
 import fr.valentinthuillier.portfolio.dao.AdminDao;
-import fr.valentinthuillier.portfolio.dto.Admin;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
