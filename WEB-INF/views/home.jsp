@@ -28,9 +28,12 @@
                 </ul>
             </nav>
             <div class="hero" data-aos="fade-in" data-aos-once="false">
-                <h1>Votre Nom</h1>
-                <p>Ingénieur en technologie & Pompier volontaire</p>
-                <p>Localisation | Disponibilité</p>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>~ Valentin THUILLIER ~</h1>
+                    <p>Etudiant en informatique & Sapeur Pompier Volontaire</p>
+                    <p>Lille | Disponible dès Juillet !</p>
+                </div>
             </div>
         </header>
     
