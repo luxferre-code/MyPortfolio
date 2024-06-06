@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS competences CASCADE ;
-DROP TABLE IF EXISTS projets CASCADE ;
-DROP TABLE IF EXISTS competences_in_projets CASCADE ;
-DROP TABLE IF EXISTS admin;
+DROP TABLE IF EXISTS competences CASCADE;
+DROP TABLE IF EXISTS projets CASCADE;
+DROP TABLE IF EXISTS competences_in_projets CASCADE;
+DROP TABLE IF EXISTS jobs CASCADE;
+DROP TABLE IF EXISTS admin CASCADE;
+DROP TABLE IF EXISTS message CASCADE;
 
 CREATE TABLE competences (
     id SERIAL,
@@ -25,9 +27,31 @@ CREATE TABLE competences_in_projets (
     CONSTRAINT fk_competences_in_projets_projet_id FOREIGN KEY (projet_id) REFERENCES projets(id) ON DELETE CASCADE
 );
 
+CREATE TABLE jobs (
+    id SERIAL,
+    name TEXT,
+    description TEXT,
+    entreprise TEXT,
+    date_debut DATE,
+    date_fin DATE,
+    CONSTRAINT pk_jobs PRIMARY KEY (id)
+);
+
+
 CREATE TABLE admin (
     id SERIAL,
-    mail TEXT,
-    password TEXT,
+    mail TEXT UNIQUE NOT NULL CHECK (mail ~* '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    password TEXT NOT NULL,
+    firstname TEXT DEFAULT 'unknown',
+    lastname TEXT DEFAULT 'unknown',
     CONSTRAINT pk_admin PRIMARY KEY (id)
+);
+
+CREATE TABLE message (
+    id SERIAL,
+    name TEXT NOT NULL,
+    mail TEXT NOT NULL CHECK (mail ~* '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    message TEXT NOT NULL,
+    repondu BOOLEAN DEFAULT FALSE,
+    CONSTRAINT pk_messages PRIMARY KEY (id)
 );

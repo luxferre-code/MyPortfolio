@@ -1,4 +1,6 @@
 <%@ page import="java.util.Calendar" %>
+<%@ page import="fr.valentinthuillier.portfolio.dao.*" %>
+<%@ page import="fr.valentinthuillier.portfolio.dto.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
@@ -21,8 +23,9 @@
             <nav>
                 <ul>
                     <li><a href="#home">Accueil</a></li>
-                    <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#about">À propos de moi</a></li>
                     <li><a href="#projects">Projets</a></li>
+                    <li><a href="#experience">Expériences professionnelles</a></li>
                     <li><a href="#skills">Compétences</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -37,29 +40,56 @@
             </div>
         </header>
     
-        <section id="gallery" data-aos="fade-up" data-aos-once="false">
-            <h2>Galerie Photo</h2>
-            <div class="photo-grid">
-                <img src="image1.jpg" alt="Photo 1">
-                <img src="image2.jpg" alt="Photo 2">
-                <!-- Ajoutez plus d'images ici -->
+        <section id="about" data-aos="fade-up" data-aos-once="false">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2>À propos de moi</h2>
+                    <div class="about-photo">
+                        <img src="./contents/me.png" alt="C'est moi :)">
+                    </div>
+                    <p>
+                        Bonjour, je m'appelle Valentin Thuillier et je suis sapeur-pompier volontaire à Oignies depuis quatre mois. J'interviens sur des missions de secours à personne. Je suis fier de contribuer à la sécurité et au bien-être de la population tout en développant mes compétences en gestion du stress, en communication, et en esprit d'équipe.
+                        <br>
+                        Je suis également étudiant en deuxième année de BUT Informatique à l'Université de Lille, où j'apprends les bases de la programmation, de la conception, et de l'analyse de systèmes informatiques. J'ai réalisé plusieurs projets en utilisant des méthodes agiles et des outils comme JavaFX, et j'ai obtenu de bons résultats. Je suis motivé par l'envie d'approfondir mes connaissances et de découvrir de nouvelles technologies. Je recherche actuellement un contrat en stage afin de mettre en pratique mes acquis et de renforcer mon expérience professionnelle. Je suis disponible pour échanger avec vous sur vos besoins et mes objectifs.
+                    </p>
+                </div>
             </div>
         </section>
-    
+        
+        <section id="experience" data-aos="fade-up" data-aos-once="false">
+            <h2>Expériences professionnelles</h2>
+            <div class="experience-list">
+                <%
+                    JobsDao jobsdao = new JobsDao();
+                    Jobs[] jobs = jobsdao.findAll();
+
+                    for(Jobs j : jobs) { %>
+                        <div class="experience-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+                            <h3><%= j.getName() %></h3>
+                            <p><%= j.getDescription() %></p>
+                            <p><em><%= j.getDates() %></em></p>
+                        </div>
+                    <% }
+                %>
+            </div>
+        </section>
+             
         <section id="projects" data-aos="fade-up" data-aos-once="false">
             <h2>Projets</h2>
             <div class="project-list">
-                <div class="project-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
-                    <h3>Projet 1</h3>
-                    <p>Description courte du projet.</p>
-                    <a href="#">En savoir plus</a>
-                </div>
-                <div class="project-item" data-aos="fade-up" data-aos-delay="200" data-aos-once="false">
-                    <h3>Projet 2</h3>
-                    <p>Description courte du projet.</p>
-                    <a href="#">En savoir plus</a>
-                </div>
-                <!-- Ajoutez plus de projets ici -->
+                <%
+                    ProjetDao projetDao = new ProjetDao();
+                    Projet[] projets = projetDao.findAll();
+
+                    for(Projet p : projets) { %>
+                        <div class="project-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+                            <img src="<%= p.getImageURL() %>" alt="<%= p.getName() %> Image">
+                            <h3><%= p.getName() %></h3>
+                            <p><%= p.getDescription() %></p>
+                            <a href="#">En savoir plus</a>
+                        </div>
+                    <%}
+                %>
             </div>
         </section>
     
@@ -69,17 +99,23 @@
                 <div class="skills" data-aos="fade-right" data-aos-once="false">
                     <h3>Compétences</h3>
                     <ul>
-                        <li>Compétence 1</li>
-                        <li>Compétence 2</li>
-                        <!-- Ajoutez plus de compétences ici -->
+                        <%
+                            CompetenceDao competenceDao = new CompetenceDao();
+                            Competence[] competences = competenceDao.findAll();
+
+                            for(Competence c : competences) { %>
+                                <li><%= c.getName() %></li>
+                            <% }
+                        %>
                     </ul>
                 </div>
                 <div class="interests" data-aos="fade-left" data-aos-once="false">
                     <h3>Centres d'intérêt</h3>
                     <ul>
-                        <li>Intérêt 1</li>
-                        <li>Intérêt 2</li>
-                        <!-- Ajoutez plus de centres d'intérêt ici -->
+                        <li>Développment</li>
+                        <li>Sport</li>
+                        <li>Musique</li>
+                        <li>Sauvetage</li>
                     </ul>
                 </div>
             </div>
@@ -87,7 +123,7 @@
     
         <section id="contact" data-aos="fade-up" data-aos-once="false">
             <h2>Contact</h2>
-            <form action="submit_form.php" method="post">
+            <form action="contact" method="get">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="name" required>
                 <label for="email">Email</label>
@@ -102,8 +138,16 @@
                 <!-- Ajoutez plus de liens sociaux ici -->
             </div>
         </section>
+
+        <footer>
+            <div class="footer-content">
+                <p>MAde by Valentin THUILLIER</p>
+                <p>&copy; <%= Calendar.getInstance().get(Calendar.YEAR) %> Valentin THUILLIER. Tous droits réservés.</p>
+                <p>Made with <span class="heart">&hearts;</span></p>
+            </div>
+        </footer>        
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="./js/scripts.js"></script>
     </body>
-    </html>
+</html>

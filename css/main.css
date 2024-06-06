@@ -53,10 +53,16 @@ nav ul li a:hover {
     background: #0074D9;
 }
 
+nav ul li a.active {
+    background-color: #0074D9; /* Couleur de surbrillance */
+    color: white; /* Couleur du texte pour la section active */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .hero {
     width: 100%;
     height: 100%;
-    background: url('../contents/background.jpg') no-repeat center center/cover;
+    background: url('../contents/background2.jpg') no-repeat center center/cover;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -84,7 +90,6 @@ nav ul li a:hover {
     z-index: 1;
     animation: blurIn 3s ease-in-out;
 }
-
 
 .hero-content {
     position: relative;
@@ -150,6 +155,14 @@ section h2 {
     text-align: left;
 }
 
+.project-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
 .project-item h3 {
     margin-top: 0;
 }
@@ -208,4 +221,86 @@ form button {
 
 .social-links a:hover {
     color: #005bb5;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text {
+    flex: 1 1 70%;
+    min-width: 250px; /* Pour garantir une bonne flexibilité */
+    text-align: center;
+}
+
+.about-text p {
+    font-size: large;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+}
+
+.about-photo {
+    flex: 1 1 60%;
+    min-width: 150px; /* Pour garantir une bonne flexibilité */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.experience-item {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    text-align: left;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-content .heart {
+    color: #e25555;
+    font-size: 1.2em;
 }

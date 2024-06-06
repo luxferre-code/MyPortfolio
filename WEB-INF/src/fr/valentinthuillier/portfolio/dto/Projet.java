@@ -19,6 +19,6 @@ public class Projet {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     public String getImageURL() {
-        return "images/projets/" + this.name.replaceAll(" ", "-") + ".png";
+        return "contents/projets/" + this.name.replace(" ", "-") + ".png";
     }
 }

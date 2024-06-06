@@ -128,7 +128,7 @@ public class AdminDao implements IDao<Admin> {
     public boolean exists(String mail, String password) {
         try (Connection con = DS.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM admin WHERE username = ? AND password = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT id FROM admin WHERE mail = ? AND password = ?");
             ps.setString(1, mail);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -142,7 +142,7 @@ public class AdminDao implements IDao<Admin> {
     public boolean createAdmin(String username, String password) {
         try (Connection con = DS.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("INSERT INTO admin (username, password) VALUES (?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO admin (mail, password) VALUES (?, ?)");
             ps.setString(1, username);
             ps.setString(2, password);
             return ps.executeUpdate() == 1;

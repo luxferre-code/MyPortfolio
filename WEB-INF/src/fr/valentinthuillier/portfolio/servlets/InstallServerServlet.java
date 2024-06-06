@@ -25,11 +25,11 @@ public class InstallServerServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(InstallServerServlet.class.getName());
     // Find install.sql
-    private static final String FILENAME_SQL_INSTALL = "/home/valentin/IdeaProjects/eportfolio/install.sql";
+    private static final String FILENAME_SQL_INSTALL = "./Documents/tomcat/webapps/portfolio/install.sql";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(DS.getConnection() == null) {
+        if(DS.getConnection() == null || req.getParameter("force") != null) {
             RequestDispatcher rq = req.getRequestDispatcher("/WEB-INF/views/install.jsp");
             rq.forward(req, resp);
         } else {

@@ -1,5 +1,6 @@
 package fr.valentinthuillier.portfolio.servlets;
 
+import fr.valentinthuillier.portfolio.DS;
 import fr.valentinthuillier.portfolio.dao.AdminDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.text.translate.CharSequenceTranslator;
@@ -19,14 +21,22 @@ public class AdminPanel extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
         String connected = (String) session.getAttribute("connected");
         RequestDispatcher rq;
+        if(DS.getConnection() == null) {
+            rq = req.getRequestDispatcher("/WEB-INF/views/install.jsp");
+            rq.forward(req, resp);
+            return;
+        }
+
         if(connected == null || !connected.equals("true")) {
             rq = req.getRequestDispatcher("/WEB-INF/views/admin-login.jsp");
+        } else if(connected != null && connected.equals("true")) {
+            rq = req.getRequestDispatcher("/WEB-INF/views/admin-panel.jsp");
         } else {
             session.setAttribute("connected", "false");
-            rq = req.getRequestDispatcher("/WEB-INF/views/admin-panel.jsp");
+            rq = req.getRequestDispatcher("/WEB-INF/views/home.jsp");
         }
         rq.forward(req, resp);
     }

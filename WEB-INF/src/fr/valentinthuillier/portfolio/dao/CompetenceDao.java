@@ -26,8 +26,7 @@ public class CompetenceDao implements IDao<Competence> {
             if(rs.next()) {
                 competence = new Competence(
                         rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description")
+                        rs.getString("name")
                 );
             }
         } catch(SQLException e) {
@@ -46,8 +45,7 @@ public class CompetenceDao implements IDao<Competence> {
             while(rs.next()) {
                 competences.add(new Competence(
                         rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description")
+                        rs.getString("name")
                 ));
             }
         } catch(SQLException e) {
@@ -60,9 +58,8 @@ public class CompetenceDao implements IDao<Competence> {
     public boolean save(Competence object) {
         try(Connection con = DS.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("INSERT INTO competences (name, description) VALUES (?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO competences (name) VALUES (?)");
             ps.setString(1, object.getName());
-            ps.setString(2, object.getDescription());
             return ps.executeUpdate() == 1;
         } catch(SQLException e) {
             log.severe(e.getMessage());
@@ -74,10 +71,9 @@ public class CompetenceDao implements IDao<Competence> {
     public boolean update(Competence object) {
         try(Connection con = DS.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("UPDATE competences SET name = ?, description = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE competences SET name = ? WHERE id = ?");
             ps.setString(1, object.getName());
-            ps.setString(2, object.getDescription());
-            ps.setInt(3, object.getId());
+            ps.setInt(2, object.getId());
             return ps.executeUpdate() == 1;
         } catch(SQLException e) {
             log.severe(e.getMessage());
