@@ -12,7 +12,7 @@ public class DS {
 
     private static final Logger log = Logger.getLogger(DS.class.getName());
 
-    private static final String CONFIG_FILE_PATH = "/home/valentin/config.prop";
+    private static final String CONFIG_FILE_PATH = "/config/myportfolio/config.prop";
     private static DS instance = null;
     private final String nom;
     private final String mdp;
