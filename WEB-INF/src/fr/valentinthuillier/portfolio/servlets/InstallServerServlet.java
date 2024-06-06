@@ -25,7 +25,7 @@ public class InstallServerServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(InstallServerServlet.class.getName());
     // Find install.sql
-    private static final String FILENAME_SQL_INSTALL = "./Documents/tomcat/webapps/portfolio/install.sql";
+    private static final String FILENAME_SQL_INSTALL = "/usr/local/tomcat/webapps/ROOT/install.sql";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
