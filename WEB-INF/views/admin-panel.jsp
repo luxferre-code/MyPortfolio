@@ -67,6 +67,33 @@
 </div>
 
 <div class="panel-container">
+    <h2>Messages from Contacts</h2>
+    <%
+        MessageDao messageDao = new MessageDao();
+        Message[] messages = messageDao.findAllUnanswered();
+        for (Message m : messages) {
+    %>
+    <div>
+        <h3><%= m.getName() %> (<a href="mailto:<%= m.getMail() %>"><%= m.getMail() %></a>)</h3>
+        <p><%= m.getMessage() %></p>
+        <p><em>Replied: <%= m.isRepondu() ? "Yes" : "No" %></em></p>
+        <%
+            if (!m.isRepondu()) {
+        %>
+        <form action="markAsReplied" method="post" style="display:inline;">
+            <input type="hidden" name="id" value="<%= m.getId() %>">
+            <button type="submit">Mark as Replied</button>
+        </form>
+        <%
+            }
+        %>
+    </div>
+    <%
+        }
+    %>
+</div>
+
+<div class="panel-container">
     <h2>Add Experience</h2>
     <form action="addExperience" method="post">
         <div>

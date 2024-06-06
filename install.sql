@@ -55,3 +55,13 @@ CREATE TABLE message (
     repondu BOOLEAN DEFAULT FALSE,
     CONSTRAINT pk_messages PRIMARY KEY (id)
 );
+
+CREATE TABLE study (
+    id SERIAL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    lieu TEXT NOT NULL,
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL,
+    CONSTRAINT pk_study PRIMARY KEY (id)
+);

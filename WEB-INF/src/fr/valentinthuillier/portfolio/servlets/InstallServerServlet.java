@@ -8,10 +8,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.eclipse.jdt.internal.compiler.batch.Main;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,8 +27,20 @@ import java.util.logging.Logger;
 public class InstallServerServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(InstallServerServlet.class.getName());
+    public static final String path;
+    static {
+        String tempPath;
+        try {
+            tempPath = new File(InstallServerServlet.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParent();
+        } catch (URISyntaxException e) {
+            tempPath = "";
+            log.severe("Failed to get the absolute path: " + e.getMessage());
+        }
+        System.out.println(tempPath);
+        path = tempPath;
+    }
     // Find install.sql
-    private static final String FILENAME_SQL_INSTALL = "/usr/local/tomcat/webapps/ROOT/install.sql";
+    private static final String FILENAME_SQL_INSTALL = path + "/install.sql";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,6 +54,11 @@ public class InstallServerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            System.out.println();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         String ip = req.getParameter("ip");
         String port = req.getParameter("port");
         String database = req.getParameter("database");
@@ -65,8 +85,9 @@ public class InstallServerServlet extends HttpServlet {
             assert connection != null;
             Statement stmt = connection.createStatement();
             for(String line : loadSQLScript(FILENAME_SQL_INSTALL)) {
-                stmt.executeUpdate(line);
+                stmt.addBatch(line);
             }
+            stmt.executeBatch();
             createAdminUser(connection, adminUsername, adminPassword);
             resp.sendRedirect(req.getContextPath() + "/admin");
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package fr.valentinthuillier.portfolio.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +106,16 @@ public class MessageDao implements IDao<Message> {
         return true;
     }
 
+    public boolean markAsReplied(int id) {
+        try(Connection con = DS.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE message SET repondu = TRUE WHERE id = ?");
+            ps.setInt(1, id);
+            return ps.executeUpdate() == 1;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public int count() {
         int count = 0;
@@ -142,7 +153,7 @@ public class MessageDao implements IDao<Message> {
         List<Message> messages = new ArrayList<>();
         try(Connection con = DS.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("SELECT id, name, mail, message, repondu FROM message WHERE repondu = 0");
+            PreparedStatement ps = con.prepareStatement("SELECT id, name, mail, message, repondu FROM message WHERE repondu = FALSE ORDER BY id DESC");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 messages.add(new Message(rs.getInt("id"), rs.getString("name"), rs.getString("mail"), rs.getString("message"), rs.getBoolean("repondu")));

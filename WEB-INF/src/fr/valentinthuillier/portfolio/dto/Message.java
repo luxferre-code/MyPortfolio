@@ -1,8 +1,7 @@
 package fr.valentinthuillier.portfolio.dto;
 
 public class Message {
-
-    private final int id;
+    private int id;
     private String name;
     private String mail;
     private String message;
@@ -16,12 +15,13 @@ public class Message {
         this.repondu = repondu;
     }
 
-    public Message(int id, String name, String mail, String message) {
-        this(id, name, mail, message, false);
-    }
-
+    // Getters et setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -55,6 +55,4 @@ public class Message {
     public void setRepondu(boolean repondu) {
         this.repondu = repondu;
     }
-    
-    
 }

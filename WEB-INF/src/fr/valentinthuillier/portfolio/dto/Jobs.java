@@ -66,7 +66,9 @@ public class Jobs {
     }
 
     public String getDates() {
-        return LocalDate.parse(startDate.toString()).format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " - " + LocalDate.parse(endDate.toString()).format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate end = LocalDate.parse(endDate.toString());
+        return LocalDate.parse(startDate.toString()).format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " - " + 
+            (end.compareTo(LocalDate.now()) > 0 ? "Aujourd'hui" : end.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
 }

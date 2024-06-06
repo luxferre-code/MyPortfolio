@@ -26,4 +26,6 @@ COPY --from=build /out /usr/local/tomcat/webapps/ROOT/WEB-INF/classes
 COPY --from=build /app/META-INF /usr/local/tomcat/webapps/ROOT/META-INF
 COPY --from=build /app/lib /usr/local/tomcat/lib
 
+VOLUME [ "/app/contents/" ]
+
 EXPOSE 8080

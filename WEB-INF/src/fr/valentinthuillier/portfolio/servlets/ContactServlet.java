@@ -45,7 +45,7 @@ public class ContactServlet extends HttpServlet {
             return;
         }
 
-        Message m = new Message(-1, name, mail, message);
+        Message m = new Message(-1, name, mail, message, false);
         IDao<Message> dao = new MessageDao();
         if(dao.save(m)) {
             Response r = new Response("Message envoyé", true);
