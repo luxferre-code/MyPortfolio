@@ -17,10 +17,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="icon" type="image/png" href="contents/icons/lettre-v.png">
+        <script src="js/icon.js" defer></script>
+        <script src="js/scripts.js" defer></script>
+        <script src="js/burger.js" defer></script>
     </head>
     <body>
         <header id="home">
             <nav>
+                <div class="menu-toggle">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
                 <ul>
                     <li><a href="#home">Accueil</a></li>
                     <li><a href="#about">À propos de moi</a></li>
@@ -39,7 +48,7 @@
                 </div>
             </div>
         </header>
-    
+
         <section id="about" data-aos="fade-up" data-aos-once="false">
             <div class="about-container">
                 <div class="about-text">
@@ -55,25 +64,7 @@
                 </div>
             </div>
         </section>
-        
-        <section id="experience" data-aos="fade-up" data-aos-once="false">
-            <h2>Expériences professionnelles</h2>
-            <div class="experience-list">
-                <%
-                    JobsDao jobsdao = new JobsDao();
-                    Jobs[] jobs = jobsdao.findAll();
 
-                    for(Jobs j : jobs) { %>
-                        <div class="experience-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
-                            <h3><%= j.getName() %></h3>
-                            <p><%= j.getDescription() %></p>
-                            <p><em><%= j.getDates() %></em></p>
-                        </div>
-                    <% }
-                %>
-            </div>
-        </section>
-             
         <section id="projects" data-aos="fade-up" data-aos-once="false">
             <h2>Projets</h2>
             <div class="project-list">
@@ -92,7 +83,25 @@
                 %>
             </div>
         </section>
-    
+
+        <section id="experience" data-aos="fade-up" data-aos-once="false">
+            <h2>Expériences professionnelles</h2>
+            <div class="experience-list">
+                <%
+                    JobsDao jobsdao = new JobsDao();
+                    Jobs[] jobs = jobsdao.findAll();
+
+                    for(Jobs j : jobs) { %>
+                        <div class="experience-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+                            <h3><%= j.getName() %></h3>
+                            <p><%= j.getDescription() %></p>
+                            <p><em><%= j.getDates() %></em></p>
+                        </div>
+                    <% }
+                %>
+            </div>
+        </section>
+
         <section id="skills" data-aos="fade-up" data-aos-once="false">
             <h2>Compétences et Centres d'intérêt</h2>
             <div class="skills-interests">
@@ -112,7 +121,7 @@
                 <div class="interests" data-aos="fade-left" data-aos-once="false">
                     <h3>Centres d'intérêt</h3>
                     <ul>
-                        <li>Développment</li>
+                        <li>Développement</li>
                         <li>Sport</li>
                         <li>Musique</li>
                         <li>Sauvetage</li>
@@ -120,7 +129,7 @@
                 </div>
             </div>
         </section>
-    
+
         <section id="contact" data-aos="fade-up" data-aos-once="false">
             <h2>Contact</h2>
             <form action="contact" method="get">
@@ -133,21 +142,20 @@
                 <button type="submit">Envoyer</button>
             </form>
             <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <!-- Ajoutez plus de liens sociaux ici -->
+                <a href="https://www.linkedin.com/in/luxferrevt/">LinkedIn</a>
+                <a href="https://github.com/luxferre-code/">GitHub</a>
             </div>
         </section>
 
         <footer>
             <div class="footer-content">
-                <p>MAde by Valentin THUILLIER</p>
+                <p>Made by Valentin THUILLIER</p>
                 <p>&copy; <%= Calendar.getInstance().get(Calendar.YEAR) %> Valentin THUILLIER. Tous droits réservés.</p>
                 <p>Made with <span class="heart">&hearts;</span></p>
+                <a href="https://www.flaticon.com/fr/stickers-gratuites/lettre-v" title="lettre v stickers">Icones par ukeicon - Flaticon</a>
             </div>
-        </footer>        
-    
+        </footer>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-        <script src="./js/scripts.js"></script>
     </body>
 </html>
