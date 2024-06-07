@@ -62,12 +62,12 @@
 </head>
 <body>
 <div class="panel-container">
-    <h1>Welcome to Admin Panel</h1>
-    <p>Here you can manage your application...</p>
+    <h1>Bienvenue sur le panel d'administration du site !</h1>
+    <p>Vous pouvez ici gérer l'entièreté des fonctionnalités de personnalisation du site</p>
 </div>
 
 <div class="panel-container">
-    <h2>Messages from Contacts</h2>
+    <h2>Messages utilisateurs</h2>
     <%
         MessageDao messageDao = new MessageDao();
         Message[] messages = messageDao.findAllUnanswered();
@@ -76,13 +76,13 @@
     <div>
         <h3><%= m.getName() %> (<a href="mailto:<%= m.getMail() %>"><%= m.getMail() %></a>)</h3>
         <p><%= m.getMessage() %></p>
-        <p><em>Replied: <%= m.isRepondu() ? "Yes" : "No" %></em></p>
+        <p><em>Répondu: <%= m.isRepondu() ? "Oui" : "Non" %></em></p>
         <%
             if (!m.isRepondu()) {
         %>
         <form action="markAsReplied" method="post" style="display:inline;">
             <input type="hidden" name="id" value="<%= m.getId() %>">
-            <button type="submit">Mark as Replied</button>
+            <button type="submit">Marqué comme répondu !</button>
         </form>
         <%
             }
@@ -94,10 +94,37 @@
 </div>
 
 <div class="panel-container">
-    <h2>Add Experience</h2>
+    <h2>Ajout d'étude</h2>
+    <form action="addStudy" method="post">
+        <div>
+            <label for="name">Nom de l'étude</label>
+            <input type="text" id="studyName" name="name" required>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="studyDescription" name="description" required></textarea>
+        </div>
+        <div>
+            <label for="lieu">Lieu</label>
+            <input type="text" id="lieu" name="lieu" required>
+        </div>
+        <div>
+            <label for="date_debut">Date de début</label>
+            <input type="date" id="date_debut" name="date_debut" required>
+        </div>
+        <div>
+            <label for="date_fin">Date de fin</label>
+            <input type="date" id="date_fin" name="date_fin" required>
+        </div>
+        <button type="submit">Ajout</button>
+    </form>
+</div>
+
+<div class="panel-container">
+    <h2>Ajout d'expérience</h2>
     <form action="addExperience" method="post">
         <div>
-            <label for="experienceName">Experience Name</label>
+            <label for="experienceName">Nom de l'expérience</label>
             <input type="text" id="experienceName" name="name" required>
         </div>
         <div>
@@ -116,15 +143,15 @@
             <label for="endDate">Date de fin</label>
             <input type="date" id="endDate" name="endDate" required>
         </div>
-        <button type="submit">Add Experience</button>
+        <button type="submit">Ajout</button>
     </form>
 </div>
 
 <div class="panel-container">
-    <h2>Add Project</h2>
+    <h2>Ajout d'un projet</h2>
     <form action="addProject" method="post" enctype="multipart/form-data">
         <div>
-            <label for="projectName">Project Name</label>
+            <label for="projectName">Nom du projet</label>
             <input type="text" id="projectName" name="name" required>
         </div>
         <div>
@@ -135,23 +162,45 @@
             <label for="projectImage">Image</label>
             <input type="file" id="projectImage" name="image" required>
         </div>
-        <button type="submit">Add Project</button>
+        <button type="submit">Ajout</button>
     </form>
 </div>
 
 <div class="panel-container">
-    <h2>Add Competence</h2>
+    <h2>Ajout d'une compétence</h2>
     <form action="addCompetence" method="post">
         <div>
-            <label for="competenceName">Competence Name</label>
+            <label for="competenceName">Nom de la compétence</label>
             <input type="text" id="competenceName" name="name" required>
         </div>
-        <button type="submit">Add Competence</button>
+        <button type="submit">Ajout</button>
     </form>
 </div>
 
 <div class="panel-container">
-    <h2>Manage Experiences</h2>
+    <h2>Gestion des études</h2>
+    <%
+        StudyDao studyDao = new StudyDao();
+        Study[] studies = studyDao.findAll();
+        for (Study s : studies) {
+    %>
+    <div>
+        <h3><%= s.getName() %></h3>
+        <p><%= s.getDescription() %></p>
+        <p><em><%= s.getLieu() %></em></p>
+        <p><em><%= s.getDates() %></em></p>
+        <form action="deleteStudy" method="post" style="display:inline;">
+            <input type="hidden" name="id" value="<%= s.getId() %>">
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+    <%
+        }
+    %>
+</div>
+
+<div class="panel-container">
+    <h2>Gestion des expériences</h2>
     <%
         JobsDao jobsDao = new JobsDao();
         Jobs[] jobs = jobsDao.findAll();
@@ -164,7 +213,7 @@
         <p><em><%= j.getStartDate() %> - <%= j.getEndDate() %></em></p>
         <form action="deleteExperience" method="post" style="display:inline;">
             <input type="hidden" name="id" value="<%= j.getId() %>">
-            <button type="submit">Delete</button>
+            <button type="submit">Supprimer</button>
         </form>
     </div>
     <%
@@ -173,7 +222,7 @@
 </div>
 
 <div class="panel-container">
-    <h2>Manage Projects</h2>
+    <h2>Gestion des projets</h2>
     <%
         ProjetDao projetDao = new ProjetDao();
         Projet[] projets = projetDao.findAll();
@@ -185,7 +234,7 @@
         <p><img src="<%= p.getImageURL() %>" alt="<%= p.getName() %> Image" width="100"></p>
         <form action="deleteProject" method="post" style="display:inline;">
             <input type="hidden" name="id" value="<%= p.getId() %>">
-            <button type="submit">Delete</button>
+            <button type="submit">Supprimer</button>
         </form>
     </div>
     <%
@@ -194,7 +243,7 @@
 </div>
 
 <div class="panel-container">
-    <h2>Manage Competences</h2>
+    <h2>Gestion des compétences</h2>
     <%
         CompetenceDao competenceDao = new CompetenceDao();
         Competence[] competences = competenceDao.findAll();
@@ -204,7 +253,7 @@
         <h3><%= c.getName() %></h3>
         <form action="deleteCompetence" method="post" style="display:inline;">
             <input type="hidden" name="id" value="<%= c.getId() %>">
-            <button type="submit">Delete</button>
+            <button type="submit">Supprimer</button>
         </form>
     </div>
     <%

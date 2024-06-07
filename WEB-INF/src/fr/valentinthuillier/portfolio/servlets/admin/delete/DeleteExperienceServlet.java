@@ -1,7 +1,7 @@
-package fr.valentinthuillier.portfolio.servlets.admin;
+package fr.valentinthuillier.portfolio.servlets.admin.delete;
 
-import fr.valentinthuillier.portfolio.dao.CompetenceDao;
-import fr.valentinthuillier.portfolio.dto.Competence;
+import fr.valentinthuillier.portfolio.dao.JobsDao;
+import fr.valentinthuillier.portfolio.dto.Jobs;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/deleteCompetence")
-public class DeleteCompetenceServlet extends HttpServlet {
+@WebServlet("/deleteExperience")
+public class DeleteExperienceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,14 +22,15 @@ public class DeleteCompetenceServlet extends HttpServlet {
         }
         int id = Integer.parseInt(request.getParameter("id"));
 
-        CompetenceDao competenceDao = new CompetenceDao();
+        JobsDao jobsDao = new JobsDao();
         
         RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/views/admin-panel.jsp");
 
-        if (!competenceDao.delete(new Competence(id, ""))) {
-            request.setAttribute("error", "Erreur lors de la suppression de la compétence");
+        if(!jobsDao.delete(new Jobs(id, "", "", "", null, null))) {
+            request.setAttribute("error", "Erreur lors de la suppression de l'expérience");
         }
 
         rq.forward(request, response);
     }
+
 }

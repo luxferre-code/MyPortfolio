@@ -1,7 +1,5 @@
 package fr.valentinthuillier.portfolio.dao;
 
-import java.util.Map;
-
 public interface IDao<T> {
 
     T find(int id);

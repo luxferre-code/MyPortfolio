@@ -1,7 +1,7 @@
-package fr.valentinthuillier.portfolio.servlets.admin;
+package fr.valentinthuillier.portfolio.servlets.admin.delete;
 
-import fr.valentinthuillier.portfolio.dao.JobsDao;
-import fr.valentinthuillier.portfolio.dto.Jobs;
+import fr.valentinthuillier.portfolio.dao.ProjetDao;
+import fr.valentinthuillier.portfolio.dto.Projet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/deleteExperience")
-public class DeleteExperienceServlet extends HttpServlet {
+@WebServlet("/deleteProject")
+public class DeleteProjectServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,16 +21,12 @@ public class DeleteExperienceServlet extends HttpServlet {
             return;
         }
         int id = Integer.parseInt(request.getParameter("id"));
-
-        JobsDao jobsDao = new JobsDao();
         
-        RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/views/admin-panel.jsp");
-
-        if(!jobsDao.delete(new Jobs(id, "", "", "", null, null))) {
-            request.setAttribute("error", "Erreur lors de la suppression de l'expérience");
+        ProjetDao projetDao = new ProjetDao();
+        RequestDispatcher rq = request.getRequestDispatcher("WEB-INF/views/admin-panel.jsp");
+        if(!projetDao.delete(new Projet(id, "", ""))) {
+            request.setAttribute("error", "Impossible de supprimer ce projet !");
         }
-
-        rq.forward(request, response);
+        rq.forward(request, response);        
     }
-
 }

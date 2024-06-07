@@ -1,4 +1,4 @@
-package fr.valentinthuillier.portfolio.servlets.admin;
+package fr.valentinthuillier.portfolio.servlets.admin.delete;
 
 import fr.valentinthuillier.portfolio.dao.CompetenceDao;
 import fr.valentinthuillier.portfolio.dto.Competence;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/updateCompetence")
-public class UpdateCompetenceServlet extends HttpServlet {
+@WebServlet("/deleteCompetence")
+public class DeleteCompetenceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,18 +20,14 @@ public class UpdateCompetenceServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "You must be connected to access this page");
             return;
         }
-
         int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-
-        Competence competence = new Competence(id, name);
 
         CompetenceDao competenceDao = new CompetenceDao();
         
         RequestDispatcher rq = request.getRequestDispatcher("/WEB-INF/views/admin-panel.jsp");
 
-        if (!competenceDao.update(competence)) {
-            request.setAttribute("error", "Erreur lors de la mise à jour de la compétence");
+        if (!competenceDao.delete(new Competence(id, ""))) {
+            request.setAttribute("error", "Erreur lors de la suppression de la compétence");
         }
 
         rq.forward(request, response);

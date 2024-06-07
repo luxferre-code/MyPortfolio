@@ -33,6 +33,7 @@
                 <ul>
                     <li><a href="#home">Accueil</a></li>
                     <li><a href="#about">À propos de moi</a></li>
+                    <li><a href="#studies">Mes études</a></li>
                     <li><a href="#projects">Projets</a></li>
                     <li><a href="#experience">Expériences professionnelles</a></li>
                     <li><a href="#skills">Compétences</a></li>
@@ -62,6 +63,24 @@
                         Je suis également étudiant en deuxième année de BUT Informatique à l'Université de Lille, où j'apprends les bases de la programmation, de la conception, et de l'analyse de systèmes informatiques. J'ai réalisé plusieurs projets en utilisant des méthodes agiles et des outils comme JavaFX, et j'ai obtenu de bons résultats. Je suis motivé par l'envie d'approfondir mes connaissances et de découvrir de nouvelles technologies. Je recherche actuellement un contrat en stage afin de mettre en pratique mes acquis et de renforcer mon expérience professionnelle. Je suis disponible pour échanger avec vous sur vos besoins et mes objectifs.
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <section id="studies" data-aos="fade-up" data-aos-once="false">
+            <h2>Mes études</h2>
+            <div class="studies-list">
+                <%
+                    StudyDao studyDao = new StudyDao();
+                    Study[] studies = studyDao.findAll();
+
+                    for(Study s : studies) { %>
+                        <div class="studies-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="false">
+                            <h3><%= s.getName() %></h3>
+                            <p><%= s.getDescription() %></p>
+                            <p><em><%= s.getDates() %></em> à <strong><%= s.getLieu() %></strong></p>
+                        </div>
+                    <% }
+                %>
             </div>
         </section>
 

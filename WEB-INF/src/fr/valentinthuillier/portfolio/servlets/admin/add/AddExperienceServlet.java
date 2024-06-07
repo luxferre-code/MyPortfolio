@@ -1,4 +1,4 @@
-package fr.valentinthuillier.portfolio.servlets.admin;
+package fr.valentinthuillier.portfolio.servlets.admin.add;
 
 import fr.valentinthuillier.portfolio.dao.JobsDao;
 import fr.valentinthuillier.portfolio.dto.Jobs;

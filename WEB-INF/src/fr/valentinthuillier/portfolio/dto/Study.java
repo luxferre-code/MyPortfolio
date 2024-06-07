@@ -1,5 +1,6 @@
 package fr.valentinthuillier.portfolio.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Study {
@@ -66,6 +67,12 @@ public class Study {
 
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public String getDates() {
+        LocalDate end = LocalDate.parse(dateFin.toString());
+        return LocalDate.parse(dateDebut.toString()).format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " - " + 
+            (end.compareTo(LocalDate.now()) > 0 ? "Aujourd'hui" : end.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
 }
