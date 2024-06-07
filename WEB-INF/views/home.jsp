@@ -142,7 +142,7 @@
                 <button type="submit">Envoyer</button>
             </form>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/luxferrevt/">LinkedIn</a>
+                <a href="https://w<!--  -->ww.linkedin.com/in/luxferrevt/">LinkedIn</a>
                 <a href="https://github.com/luxferre-code/">GitHub</a>
             </div>
         </section>

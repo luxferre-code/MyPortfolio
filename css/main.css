@@ -4,7 +4,6 @@ body {
     padding: 0;
     color: #333;
     line-height: 1.6;
-    background: #f4f4f4;
 }
 
 header {
@@ -114,7 +113,6 @@ nav ul li a.active {
 section {
     padding: 60px 20px;
     text-align: center;
-    background: #fff;
     margin: 20px 0;
     border-radius: 10px;
 }
@@ -148,7 +146,6 @@ section h2 {
 }
 
 .project-item {
-    background: #f4f4f4;
     padding: 20px;
     border-radius: 8px;
     max-width: 300px;
@@ -231,7 +228,6 @@ form button {
     justify-content: center;
     gap: 20px;
     padding: 40px;
-    background: #fff;
     border-radius: 10px;
     max-width: 1200px;
     margin: 0 auto;
@@ -273,7 +269,6 @@ form button {
 }
 
 .experience-item {
-    background: #f4f4f4;
     padding: 20px;
     border-radius: 8px;
     max-width: 600px;
@@ -305,44 +300,53 @@ footer {
     font-size: 1.2em;
 }
 
-/* Styles spécifiques pour les petits écrans */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 @media (max-width: 768px) {
+    nav {
+        background: transparent;
+    }
     nav ul {
-        display: none; /* Cache la navigation par défaut sur les petits écrans */
+        display: none;
         flex-direction: column;
-        background: rgba(0, 0, 0, 0.9);
         position: fixed;
-        top: 0; /* Ajustez selon la hauteur de votre header */
+        top: 20px;
         left: 0;
         width: 100%;
-        height: 100%; /* Assurez-vous que le menu prend toute la hauteur de l'écran */
-        padding: 0; /* Enlever les paddings */
-        margin: 0; /* Enlever les marges */
+        padding: 0;
     }
 
     nav ul li {
-        margin: 20px 0;
-        text-align: center; /* Centre le texte du menu */
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        color: black;
+        padding: 10px 15px;
+        border-radius: 5px;
     }
 
     .menu-toggle {
-        display: block; /* Affiche le bouton menu burger */
+        display: block;
         cursor: pointer;
         position: absolute;
         top: 15px;
         left: 20px;
-        z-index: 1001; /* S'assure que le bouton est au-dessus des autres éléments */
+        z-index: 1001;
     }
 
     .menu-toggle div {
         width: 30px;
         height: 3px;
-        background: #fff;
+        background: black;
         margin: 5px;
         transition: all 0.3s ease;
     }
 
-    /* Transition de l'icône menu burger en croix */
     .menu-toggle.active .bar1 {
         transform: rotate(-45deg) translate(-5px, 6px);
     }
@@ -356,6 +360,6 @@ footer {
     }
 
     nav ul.active {
-        display: flex; /* Affiche la navigation lorsque active */
+        display: flex;
     }
 }

@@ -1,25 +1,18 @@
-DROP TABLE IF EXISTS competences CASCADE;
-DROP TABLE IF EXISTS projets CASCADE;
-DROP TABLE IF EXISTS competences_in_projets CASCADE;
-DROP TABLE IF EXISTS jobs CASCADE;
-DROP TABLE IF EXISTS admin CASCADE;
-DROP TABLE IF EXISTS message CASCADE;
-
-CREATE TABLE competences (
+CREATE TABLE IF NOT EXISTS competences (
     id SERIAL,
     name TEXT,
     description TEXT,
     CONSTRAINT pk_competences PRIMARY KEY (id)
 );
 
-CREATE TABLE projets (
+CREATE TABLE IF NOT EXISTS projets (
     id SERIAL,
     name TEXT,
     description TEXT,
     CONSTRAINT pk_projets PRIMARY KEY (id)
 );
 
-CREATE TABLE competences_in_projets (
+CREATE TABLE IF NOT EXISTS competences_in_projets (
     competence_id INT,
     projet_id INT,
     CONSTRAINT pk_competences_in_projets PRIMARY KEY (competence_id, projet_id),
@@ -27,7 +20,7 @@ CREATE TABLE competences_in_projets (
     CONSTRAINT fk_competences_in_projets_projet_id FOREIGN KEY (projet_id) REFERENCES projets(id) ON DELETE CASCADE
 );
 
-CREATE TABLE jobs (
+CREATE TABLE IF NOT EXISTS jobs (
     id SERIAL,
     name TEXT,
     description TEXT,
@@ -38,7 +31,7 @@ CREATE TABLE jobs (
 );
 
 
-CREATE TABLE admin (
+CREATE TABLE IF NOT EXISTS admin (
     id SERIAL,
     mail TEXT UNIQUE NOT NULL CHECK (mail ~* '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     password TEXT NOT NULL,
@@ -47,7 +40,7 @@ CREATE TABLE admin (
     CONSTRAINT pk_admin PRIMARY KEY (id)
 );
 
-CREATE TABLE message (
+CREATE TABLE IF NOT EXISTS message (
     id SERIAL,
     name TEXT NOT NULL,
     mail TEXT NOT NULL CHECK (mail ~* '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
@@ -56,7 +49,7 @@ CREATE TABLE message (
     CONSTRAINT pk_messages PRIMARY KEY (id)
 );
 
-CREATE TABLE study (
+CREATE TABLE IF NOT EXISTS study (
     id SERIAL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
