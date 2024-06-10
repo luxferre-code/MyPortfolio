@@ -43,7 +43,7 @@ public class InstallServerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(DS.getConnection() == null || req.getParameter("force") != null) {
+        if(DS.getConnection() == null) {
             RequestDispatcher rq = req.getRequestDispatcher("/WEB-INF/views/install.jsp");
             rq.forward(req, resp);
         } else {
