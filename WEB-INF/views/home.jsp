@@ -21,6 +21,9 @@
         <script src="js/icon.js" defer></script>
         <script src="js/scripts.js" defer></script>
         <script src="js/burger.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.min.js"></script>
+        <script src="js/cv.js" defer></script>
     </head>
     <body>
         <header id="home">
@@ -149,6 +152,15 @@
             </div>
         </section>
 
+        <!-- Ajout d'un section pour le cv-->
+
+        <section id="cv" data-aos="fade-up" data-aos-once="false">
+            <h2>Mon CV</h2>
+            <button id="visualize-cv">Cliquez ici pour le voir</button>
+            <button id="download-cv" style="display: none;">Télécharger mon beau CV ?</button>
+            <canvas id="cv-canvas" style="display: none;"></canvas>
+        </section>
+
         <section id="contact" data-aos="fade-up" data-aos-once="false">
             <h2>Contact</h2>
             <form action="contact" method="get">
@@ -175,6 +187,7 @@
             </div>
         </footer>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>        
+
     </body>
 </html>

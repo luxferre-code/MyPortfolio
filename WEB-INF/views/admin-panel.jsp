@@ -1,5 +1,6 @@
 <%@ page import="fr.valentinthuillier.portfolio.dao.*" %>
 <%@ page import="fr.valentinthuillier.portfolio.dto.*" %>
+<%@ page import="fr.valentinthuillier.portfolio.CV" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%
@@ -57,6 +58,15 @@
         }
         .panel-container form button:hover {
             background-color: #0056b3;
+        }
+        #cv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 80svw;
+            height: auto;
+            min-height: 100svh;
         }
     </style>
 </head>
@@ -175,6 +185,22 @@
         </div>
         <button type="submit">Ajout</button>
     </form>
+</div>
+
+<div class="panel-container">
+    <h2>Ajout du CV</h2>
+    <form action="addCV" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="cvFile">Fichier CV</label>
+            <input type="file" id="cvFile" name="cv" required>
+        </div>
+        <button type="submit">Ajout</button>
+    </form>
+</div>
+
+<div class="panel-container">
+    <h2>Gestion du CV</h2>
+    <%= CV.toHTML() %>
 </div>
 
 <div class="panel-container">

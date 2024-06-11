@@ -332,6 +332,46 @@ html, body {
     scroll-behavior: smooth;
 }
 
+/* Existing CSS styles */
+
+#cv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+#visualize-cv, #download-cv {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+#visualize-cv:hover, #download-cv:hover {
+    background-color: #005bb5;
+}
+
+#cv-canvas {
+    display: none;
+    width: 60vw;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    #cv-canvas {
+        width: 90vw;
+    }
+}
+
 @media (max-width: 768px) {
     nav {
         background: transparent;
